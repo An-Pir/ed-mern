@@ -1,3 +1,4 @@
+import Note from '../models/Note.js'
 
 export const createNote = async (req, res) => {
     try {
@@ -6,8 +7,9 @@ export const createNote = async (req, res) => {
             title,
             content,
         })
-        res.status(201), json(newNote)
+        res.status(201).json(newNote)
     } catch (error) {
         res.status(400).json({ message: "Ошибка при создании заметки: ", error})
+        console.error(error)
     }
 }
