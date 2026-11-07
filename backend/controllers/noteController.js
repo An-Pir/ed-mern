@@ -18,7 +18,7 @@ export const createNote = async (req, res) => {
 
 export const getNote = async (req, res) => {
   try {
-    const notes = await Note.find().sort({ createdAT: -1 });
+    const notes = await Note.find().sort({ createdAt: -1 });
     res.status(200).json(notes);
   } catch (error) {
     res.status(500).json({
@@ -41,5 +41,27 @@ export const getNoteById = async (req, res) => {
     res
       .status(400)
       .json({ message: "Некоректный ID заметки", error: error.message });
+  }
+};
+
+export const updateNote = async (req, res) => {
+  try {
+    const { id } = req.params;
+    const updatedNote = await Note.findByIdAndUpdate(id, req.body, {
+      returnDocument: 'after',
+      runValidators: true,
+    });
+    if (!updatedNote) {
+      return res.status(404).json({ message: "Заметка не найдена" });
+    }
+    res.status(200).json(updatedNote);
+  } catch (error) {
+    console.error("Ошибка обновления заметки: ", error);
+    res
+      .status(400)
+      .json({
+        message: "Ошибка при обновлении заметки: ",
+        error: error.message,
+      });
   }
 };
