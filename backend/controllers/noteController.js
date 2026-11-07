@@ -65,3 +65,18 @@ export const updateNote = async (req, res) => {
       });
   }
 };
+
+export const deleteNote = async (req, res) => {
+    try {
+      const {id} = req.params;
+      const deletedNote = await Note.findByIdAndDelete(id);
+      if(!deletedNote) {
+        return res.status(404).json({message: "Заметка не найдена"})
+      }  
+      res.status(200).json({message: "Заметка успешно удалена", id: deletedNote._id})
+      console.log(deletedNote._id)
+    } catch (error) {
+        console.error("Ошибка удаления: ", error);
+       res.status(400).json({message: "Не корректный ID", error: error.message})
+    }
+}
