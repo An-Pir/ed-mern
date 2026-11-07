@@ -2,6 +2,7 @@ import express from "express";
 import cors from "cors";
 import "dotenv/config";
 import { connectDB } from "./config/db.js";
+import noteRoutes from "./routes/noteRoutes.js";
 
 const app = express();
 const PORT = process.env.PORT || 5000;
@@ -16,17 +17,7 @@ app.use((req, res, next) => {
   next();
 });
 
-app.get("/api/hello", (req, res) => {
-  res.send("Привет от сервера на Express.");
-});
-
-app.post("/api/data", (req, res) => {
-  console.log("Полученные данные", res.body);
-  res.status(201).json({
-    message: "Данные успешно получены",
-    yourData: req.body,
-  });
-});
+app.use('/api/notes', noteRoutes)
 
 const startServer = async () => {
   await connectDB();
