@@ -40,7 +40,7 @@ export const getNoteById = async (req, res) => {
     console.error("Ошибка поиска заметки: ", error);
     res
       .status(400)
-      .json({ message: "Некоректный ID заметки", error: error.message });
+      .json({ message: "Не корректный ID заметки", error: error.message });
   }
 };
 
