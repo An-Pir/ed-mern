@@ -3,6 +3,7 @@ import cors from "cors";
 import "dotenv/config";
 import { connectDB } from "./config/db.js";
 import noteRoutes from "./routes/noteRoutes.js";
+import { notFound, errorHandler } from "./middleware/errorMiddleware.js";
 
 const app = express();
 const PORT = process.env.PORT || 5000;
@@ -17,7 +18,10 @@ app.use((req, res, next) => {
   next();
 });
 
-app.use('/api/notes', noteRoutes)
+app.use('/api/notes', noteRoutes);
+
+app.use(notFound);
+app.use(errorHandler);
 
 const startServer = async () => {
   await connectDB();
