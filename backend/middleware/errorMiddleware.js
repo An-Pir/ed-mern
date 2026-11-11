@@ -8,9 +8,9 @@ export const errorHandler = (err, req, res, next) => {
   let statusCode = res.statusCode === 200 ? 500 : res.statusCode;
   let message = err.message;
 
-  if (err.name === "CastErrore" && err.kind === "ObjectId") {
+  if (err.name === "CastError" && err.kind === "ObjectId") {
     statusCode = 400;
-    message = "Некоректный формат ID";
+    message = "Не корректный формат ID";
   }
   console.error(`[Ошибка] ${statusCode} - ${message}`);
 
