@@ -34,7 +34,7 @@ export const registerUser = async (req, res, next) => {
       });
     } else {
       res.status(400);
-      throw new Error("Некоректные данные пользователя");
+      throw new Error("Не корректные данные пользователя");
     }
   } catch (error) {
     next(error);
@@ -77,7 +77,7 @@ export const getUserProfile = async (req, res, next) => {
         if(user){
             res.status(200).json(user);
         } else {
-            res.statatus(404);
+            res.status(404);
             throw new Error("Пользователь не найден");
         }
     } catch (error) {
