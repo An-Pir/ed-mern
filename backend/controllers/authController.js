@@ -1,5 +1,4 @@
 import User from "../models/User.js";
-import generateToken from "../utils/generateToken.js";
 import jwt from "jsonwebtoken";
 
 export const registerUser = async (req, res, next) => {
@@ -16,10 +15,12 @@ export const registerUser = async (req, res, next) => {
     // --- ПРОВЕРКА ПАРОЛЯ ---
     const passwordRegex =
       /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)[a-zA-Z\d@$!%*?&]{6,}$/;
-      if(!passwordRegex.test(password)){
-        res.status(400);
-        throw new Error("Пароль должен содержать минимум 6 символов, заглавную и строчную букву, а также цифру");
-      }
+    if (!passwordRegex.test(password)) {
+      res.status(400);
+      throw new Error(
+        "Пароль должен содержать минимум 6 символов, заглавную и строчную букву, а также цифру",
+      );
+    }
 
     // 2. Проверяем, нет ли уже такого email в базе
     const userExists = await User.findOne({ email });
