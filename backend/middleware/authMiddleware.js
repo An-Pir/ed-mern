@@ -7,7 +7,7 @@ export const protect = async (req, res, next) => {
     const authHeader = req.headers.authorization;
 
     // 2. Если заголовка нет вообще ИЛИ он не начинается с "Bearer " -> доступ закрыт
-    if (!authHeader || authHeader.startsWith("Bearer")) {
+    if (!authHeader || !authHeader.startsWith("Bearer ")) {
       res.status(401);
       throw new Error("Не авторизован, токен отсутствует");
     }
@@ -33,6 +33,6 @@ export const protect = async (req, res, next) => {
   } catch (error) {
     // Сюда попадут и наши throw new Error, и ошибки от jwt.verify (если токен подделан или просрочен)
     res.status(401);
-    return next(new Error("Не авторизован , не действительный токен"));
+    return next(new Error("Не авторизован , недействительный токен"));
   }
 };
