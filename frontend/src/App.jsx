@@ -1,11 +1,10 @@
 import "./App.css";
+import Register from "./components/Register";
 
 function App() {
   return (
     <div className="min-h-screen bg-slate-900 text-white flex items-center justify-center">
-      <h1 className="text-3xl font-bold text-emerald-400">
-        Заметки MERN готовы к разработке!
-      </h1>
+      <Register />
     </div>
   );
 }
