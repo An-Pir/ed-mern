@@ -1,6 +1,7 @@
 import { useNavigate } from "react-router-dom";
 import { useState } from "react";
 import api from "../api/axios";
+import Input from "./Input";
 
 const Register = () => {
   const navigate = useNavigate();
@@ -30,38 +31,30 @@ const Register = () => {
     }
   };
 
-  const inputStyle =
-    "p-3 rounded bg-slate-700 text-white focus:outline-none focus:ring-2 focus:ring-emerald-400";
-
   return (
     <div className="bg-slate-800 p-8 rounded-lg shadow-lg w-full max-w-md mx-auto mt-10">
       <h2 className="text-2xl font-bold mb-6 text-center text-emerald-400">
         Регистрация
       </h2>
       <form className="flex flex-col gap-4" onSubmit={handleSubmit}>
-        <input
-          type="text"
+        <Input
           name="name"
           placeholder="Ваше имя"
           value={formData.name}
           onChange={handleChange}
-          className={inputStyle}
         />
-        <input
-          type="text"
+        <Input
           name="email"
           placeholder="Email"
           value={formData.email}
           onChange={handleChange}
-          className={inputStyle}
         />
-        <input
+        <Input
           type="password"
           name="password"
           placeholder="Пароль (минимум 8 символов)"
           value={formData.password}
           onChange={handleChange}
-          className={inputStyle}
         />
 
         <button
