@@ -2,6 +2,7 @@ import { useNavigate } from "react-router-dom";
 import { useState } from "react";
 import api from "../api/axios";
 import Input from "./Input";
+import Button from "./Button";
 
 const Register = () => {
   const navigate = useNavigate();
@@ -56,13 +57,7 @@ const Register = () => {
           value={formData.password}
           onChange={handleChange}
         />
-
-        <button
-          type="submit"
-          className="mt-4 bg-emerald-500 hover:bg-emerald-600 text-white font-bold py-3 px-4 rounded transition-colors"
-        >
-          Зарегистрироваться
-        </button>
+        <Button type="submit" className="w-full">Зарегистрироваться</Button>
       </form>
     </div>
   );

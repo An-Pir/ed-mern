@@ -1,12 +1,16 @@
+import { useNavigate } from "react-router-dom";
 import { useState } from "react";
 import api from "../api/axios";
 import Input from "./Input";
+import Button from "./Button";
 
 const Login = () => {
   const [formData, setFormData] = useState({
     email: "",
     password: "",
   });
+
+  const navigate = useNavigate();
 
   const handleChange = (e) => {
     setFormData({ ...formData, [e.target.name]: e.target.value });
@@ -16,9 +20,10 @@ const Login = () => {
     e.preventDefault();
     try {
       const response = await api.post("api/auth/login", formData);
-      localStorage.setItem("token", response.data.token)
+      localStorage.setItem("Token", response.data.token);
+      localStorage.setItem("UserName", response.data.name);
       console.log("Вход выполнен успешно:", response.data);
-      alert("С возвращением!");
+      navigate("/");
     } catch (error) {
       const errorMessage =
         error.response?.data?.message || "Ошибка соединения с сервером";
@@ -46,12 +51,7 @@ const Login = () => {
           value={formData.password}
           onChange={handleChange}
         />
-        <button
-          type="submit"
-          className="mt-4 bg-emerald-500 hover:bg-emerald-600 text-white font-bold py-3 px-4 rounded transition-colors"
-        >
-          Войти
-        </button>
+        <Button type="submit" className="w-full"> Войти </Button>
       </form>
     </div>
   );
